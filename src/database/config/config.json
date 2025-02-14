@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Aashutosh@123",
+    "database": "education",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Aashutosh@123",
+    "database": "education",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "Aashutosh@123",
+    "database": "education",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
