@@ -16,11 +16,17 @@ import { ParentDetails } from "./parent_details.model";
 import { TeachersDetails } from "./teachers_details.model";
 
 const sequelize = new Sequelize({
+  // username: "root",
+  // password: "Aashutosh@123",
+  // database: "education",
+  // host: "127.0.0.1",
+  // dialect: "mysql",
   username: "root",
-  password: "Aashutosh@123",
-  database: "education",
-  host: "127.0.0.1",
+  password: "UzyfXxVqMWtqfHlLyUGEjDynkdCPfBYc",
+  database: "railway",
+  host: "mysql.railway.internal",
   dialect: "mysql",
+  port : 3306,
   models : [User,UserImage,Role,ClassImages,Classes,Student,StudentImages,TeacherImages,Teachers,Enrollments,Attendance,Grade,Subject,ParentDetails,TeachersDetails]
 })
 
