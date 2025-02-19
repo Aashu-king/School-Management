@@ -30,12 +30,12 @@ app.use(compression({
 }));
 
 
-const uploadsPath = path.join(__dirname, '../uploads');         
-if (!fs.existsSync(uploadsPath)) {
-    fs.mkdirSync(uploadsPath, { recursive: true });
-}
-console.log("🚀 ~ uploadsPath:", uploadsPath)
-app.use('/uploads', express.static(uploadsPath));
+// const uploadsPath = path.join(__dirname, '../uploads');         
+// if (!fs.existsSync(uploadsPath)) {
+//     fs.mkdirSync(uploadsPath, { recursive: true });
+// }
+// console.log("🚀 ~ uploadsPath:", uploadsPath)
+// app.use('/uploads', express.static(uploadsPath));
 
 
 
@@ -67,11 +67,13 @@ app.get("/", (req : Request, res : Response) => {
 const PORT = process.env.PORT || 9000;
 
 db.sequelize.authenticate().then(async () => {
-    await db.sequelize.sync()
+    await db.sequelize.sync();
+    const PORT = process.env.PORT || 9000;
     app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
+        console.log(`✅ Server running on port ${PORT}`);
     });
-    
 }).catch((error) => {
-    console.log("🚀 ~ db.sequelize.authenticate ~ error:", error);
-})
+    console.error("🚨 Database connection failed:", error);
+    process.exit(1);
+});
+
