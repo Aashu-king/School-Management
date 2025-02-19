@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import { config } from './config/config';
 import db from './database/models';
 import cors from 'cors';
@@ -58,6 +58,10 @@ app.use(passport.session());
 
 app.use('/api', routes);
 
+
+app.get("/", (req : Request, res : Response) => {
+    res.send("Hello, your Railway app is running! 🚀");
+});
 
 
 db.sequelize.authenticate().then(async () => {
