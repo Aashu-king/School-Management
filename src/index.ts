@@ -57,19 +57,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api', routes);
+console.log("✅ API Routes loaded:", routes.stack.map(r => r.route?.path));
 
 
 app.get("/", (req : Request, res : Response) => {
     res.send("Hello, your Railway app is running! 🚀");
 });
 
+const PORT = process.env.PORT || 9000;
 
 db.sequelize.authenticate().then(async () => {
     await db.sequelize.sync()
-    app.listen(config.port, () => {
-        console.log(`Server running on port ${config.port}`);
-        console.log(`Connected to database: ${config.databaseUrl}`);
-    })
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+    
 }).catch((error) => {
     console.log("🚀 ~ db.sequelize.authenticate ~ error:", error);
 })
