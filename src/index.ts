@@ -30,12 +30,12 @@ app.use(compression({
 }));
 
 
-// const uploadsPath = path.join(__dirname, '../uploads');         
-// if (!fs.existsSync(uploadsPath)) {
-//     fs.mkdirSync(uploadsPath, { recursive: true });
-// }
-// console.log("🚀 ~ uploadsPath:", uploadsPath)
-// app.use('/uploads', express.static(uploadsPath));
+const uploadsPath = path.join(__dirname, '../uploads');         
+if (!fs.existsSync(uploadsPath)) {
+    fs.mkdirSync(uploadsPath, { recursive: true });
+}
+console.log("🚀 ~ uploadsPath:", uploadsPath)
+app.use('/uploads', express.static(uploadsPath));
 
 
 
