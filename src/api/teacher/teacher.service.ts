@@ -20,7 +20,7 @@ class TeacherService {
         });
         TeacherImages.create({
             teacherId: teacher.teacherId,
-            imageUrl: `http://localhost:${process.env.PORT || 3000}/${filePath}`
+            imageUrl: `https://school-management-production-5ffa.up.railway.app/${filePath}`
         })
 
         // await t.commit();
@@ -99,7 +99,7 @@ class TeacherService {
         console.log('filePath: ', filePath);
         await TeacherImages.create({
             teacherId,
-            imageUrl: `http://localhost:${process.env.PORT || 3000}/${filePath}`
+            imageUrl: `https://school-management-production-5ffa.up.railway.app/${filePath}`
         });
         return true
     }

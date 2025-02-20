@@ -35,7 +35,7 @@ class StudentService {
             ParentDetails.bulkCreate(finalArray, { transaction: t }),
             StudentImages.create({
                 studentId: student.studentId,
-                imageUrl: `http://localhost:${process.env.PORT || 3000}/${filePath}`
+                imageUrl: `https://school-management-production-5ffa.up.railway.app/${filePath}`
             }, { transaction: t })
         ])
 
@@ -115,7 +115,7 @@ class StudentService {
 
                 await StudentImages.create({
                     studentId,
-                    imageUrl: `http://localhost:${process.env.PORT || 3000}/${filePath}`
+                    imageUrl: `https://school-management-production-5ffa.up.railway.app/${filePath}`
                 }, { transaction: t });
             }
 

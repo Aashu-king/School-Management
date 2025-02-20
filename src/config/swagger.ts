@@ -43,7 +43,7 @@ const swaggerDefinition: SwaggerDefinition = {
   },
   servers: [
     {
-      url: 'http://localhost:9000',
+      url: 'https://school-management-production-5ffa.up.railway.app',
       description: 'Development server',
     },
   ],

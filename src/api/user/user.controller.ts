@@ -12,7 +12,7 @@ class RegistrationController{
             console.log("yeryereeeeeeeeeee",files);
             const hashedpassword = await bcrypt.hash(userData.password,12);
             console.log("🚀 ~ RegistrationController ~ RegiterUser= ~ hashedpassword:", hashedpassword)
-            const IMAGE_URL = `http://localhost:9000/uploads/${files.filename}`;
+            const IMAGE_URL = `https://school-management-production-5ffa.up.railway.app/uploads/${files.filename}`;
             const user = await RegistrationService.RegiterUserRe(userData,files,hashedpassword,IMAGE_URL);
 
             if (user) {
