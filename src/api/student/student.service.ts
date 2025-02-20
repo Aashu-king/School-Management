@@ -10,37 +10,48 @@ import { Op } from "sequelize";
 
 class StudentService {
     async RegisterStudentService(studentData: any, file: any, filePath: any) {
-        const t = await db.sequelize.transaction();
-        const student = await Student.create({
-            firstName: studentData.firstName,
-            lastName: studentData.lastName,
-            email: studentData.email,
-            phone: studentData.phone,
-            dob: studentData.dob,
-            anymedicalcondition: studentData.anymedicalcondition,
-            gender: studentData.gender,
-            address: studentData.address,
-            bloodgroup: studentData.bloodgroup,
-            rollNo: studentData.rollNo,
-            registrationdate: studentData.registrationdate,
-            status: studentData.status
-        }, { transaction: t });
-        const parentsDetails = JSON.parse(studentData.parents_details);
-        const finalArray = parentsDetails.map((ele: any) => ({
-            studentId: student.studentId,
-            ...ele
-        }));
 
-        const [addedParentDetails, addedImageDetails] = await Promise.all([
-            ParentDetails.bulkCreate(finalArray, { transaction: t }),
-            StudentImages.create({
+        try {
+            const t = await db.sequelize.transaction();
+            const student = await Student.create({
+                firstName: studentData.firstName,
+                lastName: studentData.lastName,
+                email: studentData.email,
+                phone: studentData.phone,
+                dob: studentData.dob,
+                anymedicalcondition: studentData.anymedicalcondition,
+                gender: studentData.gender,
+                address: studentData.address,
+                bloodgroup: studentData.bloodgroup,
+                rollNo: studentData.rollNo,
+                registrationdate: studentData.registrationdate,
+                status: studentData.status
+            }, { transaction: t });
+            const parentsDetails = JSON.parse(studentData.parents_details);
+            console.log('parentsDetails: ', parentsDetails);
+            console.log('parentsDetails: ', parentsDetails);
+            const finalArray = parentsDetails.map(({parentId : string,...ele}) => ({
+                
                 studentId: student.studentId,
-                imageUrl: `https://school-management-production-5ffa.up.railway.app/${filePath}`
-            }, { transaction: t })
-        ])
-
-        await t.commit();
-        return { success: true, message: 'Successfully stored the data' };
+                ...ele
+            }));
+            console.log('finalArray: ', finalArray);
+    
+            const [addedParentDetails, addedImageDetails] = await Promise.all([
+                ParentDetails.bulkCreate(finalArray, { transaction: t }),
+                StudentImages.create({
+                    studentId: student.studentId,
+                    imageUrl: `https://school-management-production-5ffa.up.railway.app/${filePath}`
+                }, { transaction: t })
+            ])
+    
+            await t.commit();
+            return { success: true, message: 'Successfully stored the data' };
+        } catch (error) {
+            console.log('error: ', error);
+            
+        }
+       
     }
 
     async GetAllStudentsService(
